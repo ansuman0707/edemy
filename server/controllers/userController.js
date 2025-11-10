@@ -166,4 +166,4 @@ export const addUserRating = async (req, res)=>{
     } catch (error) {
         return res.json({ success: false, message: error.message});
     }
-}
+} 
