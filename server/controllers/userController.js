@@ -110,10 +110,10 @@ export const updateUserCourseProgress = async (req, res)=>{
             })
         }
 
-        res.json({sucess: true, message: 'Progress Updated'})
+        res.json({success: true, message: 'Progress Updated'})
 
     } catch (error) {
-        res.json({ sucess: false, message: error.message })
+        res.json({ success: false, message: error.message })
     }
 }
 
@@ -123,9 +123,9 @@ export const getUserCourseProgress = async (req, res)=>{
         const userId = req.auth.userId
         const { courseId } = req.body
         const progressData = await CourseProgress.findOne({userId, courseId})
-        res.json({sucess: true, progressData})
+        res.json({success: true, progressData})
     } catch (error) {
-        res.json({ sucess: false, message: error.message })
+        res.json({ success: false, message: error.message })
     }
 }
 
