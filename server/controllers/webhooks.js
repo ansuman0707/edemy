@@ -38,7 +38,7 @@ export const clerkWebhooks = async (req, res)=>{
                     imageUrl: data.image_url,
                 }
                 await User.findByIdAndUpdate(data.id, userData)
-                res.join({})
+                res.json({})
                 break;
             }
 
@@ -66,8 +66,8 @@ export const stripeWebhooks = async(request, response)=>{
 
     try {
         event = Stripe.webhooks.constructEvent(request.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
-    } catch (error) {
-        response.status(400).send(`Webhook Error: $(err.message)`);
+    } catch (err) {
+        response.status(400).send(`Webhook Error: ${err.message}`);
     }
 
 

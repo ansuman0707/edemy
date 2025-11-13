@@ -7,7 +7,7 @@ import { CourseProgress } from "../models/CourseProgress.js";
 // Get User Data
 export const getUserData = async (req, res)=>{
     try {
-        const userId = req.auth.userId
+        const userId = req.auth().userId
         const user = await User.findById(userId)
 
         if(!user){
@@ -24,10 +24,10 @@ export const getUserData = async (req, res)=>{
 // Users Enrolled Courses with Lecture Links
 export const userEnrolledCourses = async (req, res)=>{
     try {
-        const userId = req.auth.userId
+        const userId = req.auth().userId
         const userData = await User.findById(userId).populate('enrolledCourses')
 
-        res.json({ success: true, userEnrolledCourses: userData.enrolledCourses });
+        res.json({ success: true, enrolledCourses: userData.enrolledCourses }); //userEnrolledCourses
     } catch (error) {
         res.json({ success: false, message: error.message });
     }
@@ -38,7 +38,7 @@ export const purchaseCourse = async (req, res)=>{
     try {
         const { courseId } = req.body
         const { origin } = req.headers
-        const userId = req.auth.userId
+        const userId = req.auth().userId
         const userData = await User.findById(userId)
         const courseData = await Course.findById(courseId)
 
@@ -81,7 +81,7 @@ export const purchaseCourse = async (req, res)=>{
             }
         })
 
-        res.json({ success: true, session_url: session_url });
+        res.json({ success: true, session_url: session.url });
 
     } catch (error) {
         res.json({ success: false, message: error.message });
@@ -91,7 +91,7 @@ export const purchaseCourse = async (req, res)=>{
 // Update User Course Progress
 export const updateUserCourseProgress = async (req, res)=>{
     try {
-        const userId = req.auth.userId
+        const userId = req.auth().userId
         const { courseId, lectureId } = req.body
         const progressData = await CourseProgress.findOne({userId, courseId})
 
@@ -120,7 +120,7 @@ export const updateUserCourseProgress = async (req, res)=>{
 // Get User Course Progress
 export const getUserCourseProgress = async (req, res)=>{
     try {
-        const userId = req.auth.userId
+        const userId = req.auth().userId
         const { courseId } = req.body
         const progressData = await CourseProgress.findOne({userId, courseId})
         res.json({success: true, progressData})
@@ -132,7 +132,7 @@ export const getUserCourseProgress = async (req, res)=>{
 // Add User Ratings to Course
 
 export const addUserRating = async (req, res)=>{
-    const userId = req.auth.userId;
+    const userId = req.auth().userId;
     const { courseId, rating } = req.body;
 
     if (!courseId || !userId || !rating || rating < 1 || rating > 5) {
