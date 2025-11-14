@@ -8,6 +8,7 @@ import { CourseProgress } from "../models/CourseProgress.js";
 export const getUserData = async (req, res)=>{
     try {
         const userId = req.auth().userId
+        console.log("Looking up user with ID:", userId);
         const user = await User.findById(userId)
 
         if(!user){
