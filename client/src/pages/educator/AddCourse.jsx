@@ -3,6 +3,8 @@ import uniqid from 'uniqid';
 import Quill from 'quill';
 import { assets } from '../../assets/assets';
 import { AppContext } from '../../context/AppContext';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const AddCourse = () => {
 
@@ -29,7 +31,7 @@ const AddCourse = () => {
 
   const handleChapter = (action, chapterId) => {
     if (action === 'add') {
-      const title = prompt('Enter Chapter Nmae:');
+      const title = prompt('Enter Chapter Name:');
       if (title) {
         const newChapter = {
           chapterId: uniqid(),

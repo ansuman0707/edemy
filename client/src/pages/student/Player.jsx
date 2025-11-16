@@ -7,6 +7,7 @@ import Youtube from 'react-youtube'
 import Footer from '../../components/student/Footer'
 import Rating from '../../components/student/Rating'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 const Player = () => { //You have a error in this code solve it later
 

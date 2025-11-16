@@ -3,6 +3,7 @@ import { assets } from '../../assets/assets'
 import { Link } from 'react-router-dom'
 import { useClerk, UserButton, useUser } from '@clerk/clerk-react'
 import { AppContext } from '../../context/AppContext'
+import axios from 'axios'
 
 const Navbar = () => {
 
